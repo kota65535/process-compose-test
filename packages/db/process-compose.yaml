@@ -1,0 +1,9 @@
+version: "0.5"
+
+processes:
+  db-start:
+    command: ./db-start.sh
+    readiness_probe:
+      exec:
+        command: nc -z localhost 3306
+      initial_delay_seconds: 1

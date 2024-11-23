@@ -1,0 +1,14 @@
+version: "0.5"
+
+extends: ../db/process-compose.yaml
+
+processes:
+  start:
+    command: ./server-start.sh
+    depends_on:
+      db-start:
+        condition: process_healthy
+    readiness_probe:
+      exec:
+        command: nc -z localhost 8000
+      initial_delay_seconds: 1
